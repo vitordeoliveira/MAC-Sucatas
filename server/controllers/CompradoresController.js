@@ -1,9 +1,22 @@
-const { Compradores } = require("../../models");
+const { Compradores, Vendas, Produtos } = require("../../models");
 
 module.exports = {
   async index(req, res) {
     try {
-      const compradores = await Compradores.findAll();
+      const compradores = await Compradores.findAll({
+        attributes: ["id", "name"],
+        include: {
+          model: Vendas,
+          as: "Vendas",
+          attributes: ["id", "value", "amount"],
+          include: [
+            {
+              model: Produtos,
+              attributes: ["id", "name"]
+            }
+          ]
+        }
+      });
       return res.json(compradores);
     } catch (error) {
       console.log(error);

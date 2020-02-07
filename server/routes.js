@@ -38,7 +38,7 @@ routes.post("/compras", auth, ComprasController.store);
 routes.get("/vendas", auth, VendasController.index);
 routes.post("/vendas", auth, VendasController.store);
 
-routes.get("/empresas", EmpresasController.index);
+routes.get("/empresas", auth, EmpresasController.index);
 routes.post("/empresas", EmpresasController.store);
 routes.get("/roles", RolesController.index);
 routes.post("/roles", RolesController.store);
